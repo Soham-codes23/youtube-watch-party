@@ -20,7 +20,7 @@ const Home = () => {
   const fetchActiveRooms = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/rooms`);
-      setActiveRooms(res.data);
+      setActiveRooms(res.data.rooms || []);
     } catch (err) {
       console.error('Failed to fetch rooms', err);
     } finally {
