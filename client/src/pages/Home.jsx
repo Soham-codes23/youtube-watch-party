@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Plus, ArrowRight, Users } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-1jzj.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-j1zj.onrender.com';
 
 const Home = () => {
   const [roomName, setRoomName] = useState('');

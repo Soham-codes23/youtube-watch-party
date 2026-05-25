@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-1jzj.onrender.com';
+const SOCKET_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-j1zj.onrender.com';
 
 export const initSocket = () => {
   const token = localStorage.getItem('token');
