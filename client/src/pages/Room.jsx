@@ -9,7 +9,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import Chat from '../components/Chat';
 import ParticipantList from '../components/ParticipantList';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-1jzj.onrender.com';
 
 const Room = () => {
   const { roomCode } = useParams();
