@@ -19,7 +19,7 @@ const Home = () => {
 
   const fetchActiveRooms = async () => {
     try {
-      const res = await axios.get(`${API_URL}/rooms`);
+      const res = await axios.get(`${API_URL}/api/rooms`);
       setActiveRooms(res.data);
     } catch (err) {
       console.error('Failed to fetch rooms', err);
@@ -32,7 +32,7 @@ const Home = () => {
     e.preventDefault();
     if (!roomName.trim()) return;
     try {
-      const res = await axios.post(`${API_URL}/rooms`, { name: roomName });
+      const res = await axios.post(`${API_URL}/api/rooms`, { name: roomName });
       toast.success('Room created!');
       navigate(`/room/${res.data.roomCode}`);
     } catch (err) {
