@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 export const AuthContext = createContext();
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-j1zj.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://watchparty-backend-j1zj.onrender.com/api';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
