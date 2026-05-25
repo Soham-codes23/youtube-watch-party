@@ -62,8 +62,9 @@ const handleJoinRoom = async (e) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.post(
-      `${API_URL}/api/rooms/${joinCode}/join`,
+    
+      await axios.post(
+  `${API_URL}/api/rooms/${joinCode}/join`,
       {},
       {
         headers: {
