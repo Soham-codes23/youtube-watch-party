@@ -28,17 +28,31 @@ const Home = () => {
     }
   };
 
-  const handleCreateRoom = async (e) => {
-    e.preventDefault();
-    if (!roomName.trim()) return;
-    try {
-      const res = await axios.post(`${API_URL}/api/rooms`, { name: roomName });
-      toast.success('Room created!');
-      navigate(`/room/${res.data.roomCode}`);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to create room');
-    }
-  };
+ const handleCreateRoom = async (e) => {
+  e.preventDefault();
+
+  if (!roomName.trim()) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.post(
+      `${API_URL}/api/rooms`,
+      { name: roomName },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    toast.success("Room created!");
+
+    navigate(`/room/${res.data.room.roomCode}`);
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Failed to create room");
+  }
+};
 
   const handleJoinRoom = async (e) => {
     e.preventDefault();
@@ -168,6 +182,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
 
+};
 export default Home;
