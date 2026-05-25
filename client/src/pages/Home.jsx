@@ -54,25 +54,49 @@ const Home = () => {
   }
 };
 
-  const handleJoinRoom = async (e) => {
-    e.preventDefault();
-    if (!joinCode.trim()) return;
-    try {
-      await axios.post(`${API_URL}/rooms/${joinCode}/join`);
-      navigate(`/room/${joinCode}`);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to join room');
-    }
-  };
+const handleJoinRoom = async (e) => {
+  e.preventDefault();
+
+  if (!joinCode.trim()) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      `${API_URL}/api/rooms/${joinCode}/join`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    navigate(`/room/${joinCode}`);
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Failed to join room");
+  }
+};
 
   const handleJoinActiveRoom = async (code) => {
-    try {
-      await axios.post(`${API_URL}/rooms/${code}/join`);
-      navigate(`/room/${code}`);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to join room');
-    }
-  };
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      `${API_URL}/api/rooms/${code}/join`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    navigate(`/room/${code}`);
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Failed to join room");
+  }
+};
 
   return (
     <div className="container animate-fade-in">
