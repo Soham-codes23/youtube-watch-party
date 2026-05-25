@@ -43,16 +43,21 @@ const Room = () => {
 
   const fetchRoomDetails = async () => {
     try {
-      const res = await axios.get(`${API_URL}/rooms/${roomCode}`);
-      setRoom(res.data);
-      setParticipants(res.data.participants);
-      if (res.data.currentVideo) {
-        setVideoState({
-          videoId: res.data.currentVideo.videoId || '',
-          isPlaying: res.data.currentVideo.isPlaying || false,
-          timestamp: res.data.currentVideo.timestamp || 0
-        });
-      }
+      const token = localStorage.getItem('token');
+      const res = await axios.get(
+        `${API_URL}/api/rooms/${roomCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = res.data || {};
+      setRoom(data.room || data);
+      setParticipants(data.participants || []);
+      setMessages(data.messages || []);
+      setVideoState(data.videoState || data.video || { videoId: '', isPlaying: false, timestamp: 0 });
       setLoading(false);
     } catch (err) {
       toast.error('Failed to load room details');
